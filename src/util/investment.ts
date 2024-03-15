@@ -5,7 +5,7 @@
 // - expectedReturn: The expected (annual) rate of return
 // - duration: The investment duration (time frame)
 
-interface InvestmentData {
+export interface InvestmentDataType {
   initialInvestment: number;
   annualInvestment: number;
   expectedReturn: number;
@@ -24,7 +24,7 @@ export function calculateInvestmentResults({
   annualInvestment,
   expectedReturn,
   duration,
-}: InvestmentData): AnnualInvestmentData[] {
+}: InvestmentDataType): AnnualInvestmentData[] {
   const annualData: AnnualInvestmentData[] = [];
   let investmentValue: number = initialInvestment;
 
