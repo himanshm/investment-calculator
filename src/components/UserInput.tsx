@@ -1,25 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import Input from './Input';
 import { InvestmentDataType } from '../util/investment';
 
-const initialData: InvestmentDataType = {
-  initialInvestment: 10000,
-  annualInvestment: 1200,
-  expectedReturn: 6,
-  duration: 10,
+type UserInputProps = {
+  inputs: InvestmentDataType;
+  onChangeInput: (identifier: string, value: number) => void;
 };
 
-function UserInput() {
-  const [userInputs, setUserInputs] = useState(initialData);
-
-  function handleChange(inputIdentifier: string, newValue: number) {
-    setUserInputs((prevUserInput) => {
-      return {
-        ...prevUserInput,
-        [inputIdentifier]: newValue,
-      };
-    });
-  }
+function UserInput({ onChangeInput, inputs }: UserInputProps) {
   return (
     <section id='user-input'>
       <div className='input-group'>
@@ -27,9 +15,9 @@ function UserInput() {
           label='Initial Investment'
           id='initial-investment'
           type='number'
-          value={userInputs.initialInvestment}
+          value={inputs.initialInvestment}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange('initialInvestment', +event.target.value)
+            onChangeInput('initialInvestment', +event.target.value)
           }
           required
         />
@@ -37,9 +25,9 @@ function UserInput() {
           label='Annual Investment'
           id='annual-investment'
           type='number'
-          value={userInputs.annualInvestment}
+          value={inputs.annualInvestment}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange('annualInvestment', +event.target.value)
+            onChangeInput('annualInvestment', +event.target.value)
           }
           required
         />
@@ -49,9 +37,9 @@ function UserInput() {
           label='Expected Return'
           id='expected-return'
           type='number'
-          value={userInputs.expectedReturn}
+          value={inputs.expectedReturn}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange('expectedReturn', +event.target.value)
+            onChangeInput('expectedReturn', +event.target.value)
           }
           required
         />
@@ -59,9 +47,9 @@ function UserInput() {
           label='duration'
           id='duration'
           type='number'
-          value={userInputs.duration}
+          value={inputs.duration}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange('duration', +event.target.value)
+            onChangeInput('duration', +event.target.value)
           }
           required
         />
