@@ -14,6 +14,8 @@ const initialData: InvestmentDataType = {
 function App() {
   const [userInputs, setUserInputs] = useState(initialData);
 
+  const inputIsValid = userInputs.duration >= 1;
+
   function handleChange(inputIdentifier: string, newValue: number) {
     setUserInputs((prevUserInput) => {
       return {
@@ -26,7 +28,10 @@ function App() {
     <>
       <Header />
       <UserInput inputs={userInputs} onChangeInput={handleChange} />
-      <Results inputs={userInputs} />
+      {!inputIsValid && (
+        <p className='center'>Please enter valid input data!</p>
+      )}
+      {inputIsValid && <Results inputs={userInputs} />}
     </>
   );
 }
